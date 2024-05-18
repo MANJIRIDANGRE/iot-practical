@@ -1,0 +1,21 @@
+#include "grove.h" // for button->value()
+#include <stdio.h> // for printf()
+#include <unistd.h> //for sleep()
+int main()
+{
+// Create the button object using GPIO pin D4
+upm::GroveButton* button = new upm::GroveButton(4);
+int count = 5;
+int button_val=0;
+while( count > 0 ) {
+button_val = button->value(); //read button value and store to local variable
+printf ("Program will exit after %d button presses\n", count);
+printf ("Button value is: %d\n ", button_val);
+if (button_val)
+count--;
+usleep(500000); //0.5 second
+}
+printf ("Exiting, bye!");
+// Delete the button object
+delete button;
+}
